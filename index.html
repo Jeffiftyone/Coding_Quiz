@@ -13,23 +13,23 @@
             <h3>time left</h3>
             <div class="large-font timer-count"></div>
         </header>
-        <section>
-            <div class="main-text"><h2>Coding Quiz</h2></div>
+        <section id="main-panel">
+            <div><h2 class="main-text">Coding Quiz</h2></div>
             <div><button class="btn" id="start-btn"> Start</button></div>
             <div class="options"> 
-                <!-- <button>option1</button>
-                <button>option2</button>
-                <button>option3</button>
-                <button>option4</button> -->
+                <button id="option1">option1</button>
+                <button id="option2">option2</button>
+                <button id="option3">option3</button>
+                <button id="option4">option4</button>
             </div>
             <div class="end-screen">
-
-            </div>
-            <div class="score-screen">
-                <ol id="scores"></ol>
             </div>
         </section>
-
+        <div class="score-screen" id="high-scores">
+            <ol id="scores"></ol>
+        <button id="back-btn">Go Back</button>
+        <button id="clear-btn">Clear Scores</button>
+        </div>
     </main>
 
 <script src="./assets/js/script.js"></script>

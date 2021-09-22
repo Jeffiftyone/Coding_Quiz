@@ -2,9 +2,16 @@
 let timerElement=document.querySelector(".timer-count");
 let mainText=document.querySelector(".main-text");
 let startButton=document.getElementById("start-btn");
-let scorePanel=document.querySelector(".score-screen");
+let scorePanel=document.getElementById("high-scores");
+let mainPanel=document.getElementById("main-panel");
 let endScreen=document.querySelector(".end-screen");
 let scoreList=document.getElementById("scores");
+let option1=document.getElementById("option1");
+let option2=document.getElementById("option2");
+let option3=document.getElementById("option3");
+let option4=document.getElementById("option4");
+let backButton=document.getElementById("back-btn");
+let clearButton=document.getElementById("clear-btn");
 let timerCount;
 let player="";
 let score=5;
@@ -56,7 +63,7 @@ let question = [{
 
 //once the start button is pressed
 function startGame(){
-   timerCount=10;
+  timerCount=10;
    //hide start button
    startButton.style.display="none";
       startTimer();
@@ -75,7 +82,23 @@ function startTimer(){
 }
 //main page switched to questions
 function questionPage(question){
+
 }
+//hide buttons 
+function hideOptions(){
+    option1.style.display="none";
+    option2.style.display="none";
+    option3.style.display="none";
+    option4.style.display="none";
+}
+
+function showOptions(){
+    option1.style.display="block";
+    option2.style.display="block";
+    option3.style.display="block";
+    option4.style.display="block";
+}
+
 
 //if user selects an answer, they proceeed to the next question
 
@@ -84,6 +107,8 @@ function questionPage(question){
 
 //when timer hits 0, game is over, score is displayed
 function endGame(){
+    //hide question buttons
+    hideOptions();
     //user can enter their initials to highscore (saved locally)
     console.log("End Screen enabled");
     mainText.textContent="Enter your initials: ";
@@ -99,39 +124,58 @@ function endGame(){
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("value", "Submit");
 
+    //create buttons and text field
+    endScreen.appendChild(initialInput);
+    endScreen.appendChild(submitButton);
+    
     //button is clicked
     submitButton.addEventListener("click",function(){
         //add to local storage
-    localStorage.setItem("score",score);
-    localStorage.setItem("player",initialInput.value);
-    
-    console.log("submit button pressed");
+        localStorage.setItem("score",score);
+        localStorage.setItem("player",initialInput.value);
+        console.log("submit button pressed");
+        //remove submit button and text field
+        endScreen.removeChild(initialInput);
+        endScreen.removeChild(submitButton);
 
-    //add new score to score list
-    let newScore = document.createElement("li");
-    let scoreInfo = document.createTextNode(initialInput.value+" : " +score);
-    newScore.appendChild(scoreInfo);
-    //if new score is higher, add to top of list
-        if (prevScore<score){
-            scoreList.prepend(newScore);
-        }
-        else{
-            scoreList.appendChild(newScore);
-        }
-    //scoreScreen(); 
-    
+        //add new score to score list
+        let newScore = document.createElement("li");
+        let scoreInfo = document.createTextNode(initialInput.value+" : " +score);
+        newScore.appendChild(scoreInfo);
+        //if new score is higher, add to top of list
+            if (prevScore<score){
+                scoreList.prepend(newScore);
+            }
+            else{
+                scoreList.appendChild(newScore);
+            }
+        scoreScreen(); 
+        //revert to main screen
+        mainText.textContent="Coding Quiz"
+        startButton.style.display="block";
     });
-    //create buttons
-    endScreen.appendChild(initialInput);
-    endScreen.appendChild(submitButton);
+}
+function hideScores(){
+    scorePanel.style.display="none";
 }
 
 function scoreScreen(){
+    mainPanel.style.display="none";
+    scorePanel.style.display="block";
 
+    backButton.onclick = function(){
+        mainPanel.style.display="block";
+        hideScores();
+    }
+    clearButton.onclick = function(){
+        scoreList.innerHTML='';
+    }
 }
 
 //user can wipe scores too by pressing 'clear scores' or go back to the first screen
-
+//hide options buttons on startup
+hideOptions();
+hideScores();
 startButton.onclick = function(){
     console.log("Start button clicked")
     startGame();
