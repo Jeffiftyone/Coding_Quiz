@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <main>
@@ -17,16 +18,18 @@
             <div><h2 class="main-text">Coding Quiz</h2></div>
             <div><button class="btn" id="start-btn"> Start</button></div>
             <div class="options"> 
-                <button id="option1">option1</button>
-                <button id="option2">option2</button>
-                <button id="option3">option3</button>
-                <button id="option4">option4</button>
+                <button style="display: none" id="option1">option1</button>
+                <button style="display: none" id="option2">option2</button>
+                <button style="display: none" id="option3">option3</button>
+                <button style="display: none" id="option4">option4</button>
             </div>
+            <div style="display: none" id="correct">CORRECT! :)</div>
+            <div style="display: none" id="incorrect">Wrong. :(</div>
             <div class="end-screen">
             </div>
         </section>
-        <div class="score-screen" id="high-scores">
-            <ol id="scores"></ol>
+        <div class="score-screen" style="display: none" id="high-scores">
+            <ul id="scores"></ul>
         <button id="back-btn">Go Back</button>
         <button id="clear-btn">Clear Scores</button>
         </div>

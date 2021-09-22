@@ -12,10 +12,12 @@ let option3=document.getElementById("option3");
 let option4=document.getElementById("option4");
 let backButton=document.getElementById("back-btn");
 let clearButton=document.getElementById("clear-btn");
+let correctPopup=document.getElementById("correct");
+let incorrectPopup=document.getElementById("incorrect");
 let timerCount;
 let player="";
-let score=5;
-let prevScore=0;
+let score=0;
+let highestScore=0;
 //Put questions as objects
 let question = [{
     text: "Which of the following should be used to save an assigned value?",
@@ -26,47 +28,49 @@ let question = [{
     option4 : "attribute"
 },
 {
-    text: "Which of the following should be used to save an assigned value?",
-    answer : "variable",
-    option1 : "variable",
-    option2 : "class",
-    option3 : "type",
-    option4 : "attribute"
+    text: "Which of the following is a unique selector in CSS?",
+    answer : "id",
+    option1 : "class",
+    option2 : "semantic",
+    option3 : "id",
+    option4 : "header"
 },
 {
-    text: "Which of the following should be used to save an assigned value?",
-    answer : "variable",
-    option1 : "variable",
-    option2 : "class",
-    option3 : "type",
-    option4 : "attribute"
+    text: "What index does an array start at in Java?",
+    answer : "0",
+    option1 : "1",
+    option2 : "0",
+    option3 : "-1",
+    option4 : "2"
 },
 {
-    text: "Which of the following should be used to save an assigned value?",
+    text: "Which of the following should be used to save an assigned value2?",
     answer : "variable",
-    option1 : "variable",
+    option1 : "attribute",
     option2 : "class",
     option3 : "type",
-    option4 : "attribute"
+    option4 : "variable"
 },
 {
-    text: "Which of the following should be used to save an assigned value?",
+    text: "Which of the following should be used to save an assigned value3?",
     answer : "variable",
     option1 : "variable",
     option2 : "class",
     option3 : "type",
     option4 : "attribute"
 }
-
 ];
-
 
 //once the start button is pressed
 function startGame(){
-  timerCount=10;
+    //set timer to 75
+    timerCount=75;
+    //set score to 0
+    score=0;
    //hide start button
    startButton.style.display="none";
       startTimer();
+      questionPage();
 }
 //Timer begins
 function startTimer(){
@@ -74,18 +78,107 @@ function startTimer(){
     timer=setInterval(function(){
         timerCount--;
         timerElement.textContent=timerCount;
-        if (timerCount===0){
+        if (timerCount<=0){
             clearInterval(timer); //clears the interval
             endGame();
         }
     },1000);
 }
-//main page switched to questions
-function questionPage(question){
 
+//main page switched to questions
+
+function questionPage(){
+    showOptions();
+    //get questions from array
+         let i=0;
+         mainText.textContent=question[i].text;
+         option1.textContent=question[i].option1;
+         option2.textContent=question[i].option2;
+         option3.textContent=question[i].option3;
+         option4.textContent=question[i].option4;
+         
+         function updateQuestions(){
+            i++;
+            if(i==question.length){
+                timerCount=timerCount-75;
+            }
+        mainText.textContent=question[i].text;
+        option1.textContent=question[i].option1;
+        option2.textContent=question[i].option2;
+        option3.textContent=question[i].option3;
+        option4.textContent=question[i].option4;
+         }
+
+         
+        //button logic, if the option chosen matches the answer, its correct
+        option1.onclick = function(){
+            if(question[i].option1==question[i].answer){
+                updateQuestions();
+                optionCorrect();
+            }
+            else {
+                 updateQuestions();
+                 optionWrong();
+                }
+        }
+        option2.onclick = function(){
+            if(question[i].option2==question[i].answer){
+                updateQuestions();
+                optionCorrect();
+            }
+            else {
+                 updateQuestions();
+                 optionWrong();
+                }
+        }
+        option3.onclick = function(){
+            if(question[i].option3==question[i].answer){
+                updateQuestions();
+                optionCorrect();
+            }
+            else {
+                 updateQuestions();
+                 optionWrong();
+                }
+        }
+        option4.onclick = function(){
+            if(question[i].option4==question[i].answer){
+                updateQuestions();
+                optionCorrect();
+            }
+            else {
+                timerCount=timerCount-10;
+                updateQuestions();
+                optionWrong();
+                }
+        }
+}
+
+
+function optionWrong(){
+    //decrease time
+    timerCount=timerCount-10
+    //display text on screen for a short amoount of time
+    incorrectPopup.style.display="block";
+    setTimeout(function(){
+        incorrectPopup.style.display="none";
+   },1000);
+
+}
+function optionCorrect(){
+    //increment score
+    score+=5;
+    //display text on screen for a short amount of time
+    correctPopup.style.display="block";
+    setTimeout(function(){
+    correctPopup.style.display="none";
+   },1000);
+ 
 }
 //hide buttons 
 function hideOptions(){
+    incorrectPopup.style.display="none";
+    correctPopup.style.display="none";
     option1.style.display="none";
     option2.style.display="none";
     option3.style.display="none";
@@ -105,8 +198,11 @@ function showOptions(){
 //if the answer is correct their score is increased
 //if the answer is incorrect, the time is lowered by 10 seconds
 
+
 //when timer hits 0, game is over, score is displayed
 function endGame(){
+    //set timer to 0
+    timerElement.textContent=0;
     //hide question buttons
     hideOptions();
     //user can enter their initials to highscore (saved locally)
@@ -142,18 +238,33 @@ function endGame(){
         let newScore = document.createElement("li");
         let scoreInfo = document.createTextNode(initialInput.value+" : " +score);
         newScore.appendChild(scoreInfo);
-        //if new score is higher, add to top of list
-            if (prevScore<score){
-                scoreList.prepend(newScore);
-            }
-            else{
-                scoreList.appendChild(newScore);
-            }
+        //add score to list
+        scoreList.appendChild(newScore);
         scoreScreen(); 
         //revert to main screen
         mainText.textContent="Coding Quiz"
         startButton.style.display="block";
     });
+}
+function sortList(ul){
+    var new_ul = ul.cloneNode(false);
+    // Add all lis to an array
+    var lis = [];
+    for(var i = ul.childNodes.length; i--;){
+        if(ul.childNodes[i].nodeName === 'LI')
+            lis.push(ul.childNodes[i]);
+    }
+
+    // Sort the lis in descending order
+    lis.sort(function(a, b){
+       return parseInt(b.childNodes[0].data , 10) - 
+              parseInt(a.childNodes[0].data , 10);
+    });
+
+    // Add them into the ul in order
+    for(var i = 0; i < lis.length; i++)
+        new_ul.appendChild(lis[i]);
+    ul.parentNode.replaceChild(new_ul, ul);
 }
 function hideScores(){
     scorePanel.style.display="none";
@@ -174,8 +285,8 @@ function scoreScreen(){
 
 //user can wipe scores too by pressing 'clear scores' or go back to the first screen
 //hide options buttons on startup
-hideOptions();
-hideScores();
+
+
 startButton.onclick = function(){
     console.log("Start button clicked")
     startGame();
