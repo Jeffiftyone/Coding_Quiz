@@ -14,10 +14,14 @@ let backButton=document.getElementById("back-btn");
 let clearButton=document.getElementById("clear-btn");
 let correctPopup=document.getElementById("correct");
 let incorrectPopup=document.getElementById("incorrect");
+let viewScores=document.getElementById("view");
 let timerCount;
 let player="";
 let score=0;
 let highestScore=0;
+
+viewScores.addEventListener
+
 //Put questions as objects
 let question = [{
     text: "Which of the following should be used to save an assigned value?",
@@ -36,7 +40,7 @@ let question = [{
     option4 : "header"
 },
 {
-    text: "What index does an array start at in Java?",
+    text: "What index does an array start at in most programming languages?",
     answer : "0",
     option1 : "1",
     option2 : "0",
@@ -44,20 +48,20 @@ let question = [{
     option4 : "2"
 },
 {
-    text: "Which of the following should be used to save an assigned value2?",
-    answer : "variable",
-    option1 : "attribute",
-    option2 : "class",
-    option3 : "type",
-    option4 : "variable"
+    text: "which loop should be used when you know how many times to run?",
+    answer : "for loop",
+    option1 : "while loop",
+    option2 : "for loop",
+    option3 : "do while loop",
+    option4 : "loopty loop"
 },
 {
-    text: "Which of the following should be used to save an assigned value3?",
-    answer : "variable",
-    option1 : "variable",
-    option2 : "class",
-    option3 : "type",
-    option4 : "attribute"
+    text: "The following can be used to describe code but not run anything",
+    answer : "comments",
+    option1 : "stickers",
+    option2 : "instructions",
+    option3 : "console.log",
+    option4 : "comments"
 }
 ];
 
@@ -157,22 +161,26 @@ function questionPage(){
 
 function optionWrong(){
     //decrease time
-    timerCount=timerCount-10
     //display text on screen for a short amoount of time
     incorrectPopup.style.display="block";
     setTimeout(function(){
         incorrectPopup.style.display="none";
    },1000);
 
+   //decrease time
+    timerCount=timerCount-10
+
+
 }
 function optionCorrect(){
-    //increment score
-    score+=5;
     //display text on screen for a short amount of time
     correctPopup.style.display="block";
     setTimeout(function(){
     correctPopup.style.display="none";
-   },1000);
+    },1000);
+    //increment score
+    score+=5;
+ 
  
 }
 //hide buttons 
@@ -202,7 +210,7 @@ function showOptions(){
 //when timer hits 0, game is over, score is displayed
 function endGame(){
     //set timer to 0
-    timerElement.textContent=0;
+    timerElement.textContent='';
     //hide question buttons
     hideOptions();
     //user can enter their initials to highscore (saved locally)
@@ -285,7 +293,9 @@ function scoreScreen(){
 
 //user can wipe scores too by pressing 'clear scores' or go back to the first screen
 //hide options buttons on startup
-
+viewScores.addEventListener("click", function(){
+    scoreScreen();
+});
 
 startButton.onclick = function(){
     console.log("Start button clicked")

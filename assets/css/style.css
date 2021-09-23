@@ -1,0 +1,64 @@
+body{
+background-color:slategray;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+#id{
+    margin:auto;
+
+}
+
+h2{
+    color:white;
+    
+}
+.options{
+    display:flexbox;
+}
+button{
+padding: 5px 10px;
+width:150px ;
+height: 50px;
+font-size: 125%;
+background-color: orchid;
+border-radius: 25px;
+box-sizing: border-box;
+color:#ffffff;
+
+}
+button:hover{
+    color:#000000;
+    background-color: #ffffff;
+}
+
+
+.timer{
+    font-size: 125%;
+    color: white;
+    text-align:right;
+    margin-right:50px;
+    justify-content: flex-end;
+    display: flex;
+}
+
+#view{
+    color:palegreen;
+    font-weight:bold;
+}
+
+#main-panel{
+    margin-left: auto;
+    margin-right: auto;
+    width: 24em;
+}
+
+#correct{
+color: greenyellow;
+font-size: 100%;
+font-weight: bolder;
+}
+#incorrect{
+    color: orangered;
+    font-size: 100%;
+    font-weight: bolder;
+}

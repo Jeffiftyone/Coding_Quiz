@@ -5,17 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
+  
 </head>
 <body>
     <main>
-        <header>
-            <div>View Highscores </div>
-            <h3>time left</h3>
-            <div class="large-font timer-count"></div>
-        </header>
+        <section>
+            <div class="header">
+                <div id="view">View Highscores </div>
+                <div class="timer">
+                    <div>time left:  </div>
+                    <div class="large-font timer-count" id="count"></div>
+                </div>
+
+            </div>
+        </section>
         <section id="main-panel">
-            <div><h2 class="main-text">Coding Quiz</h2></div>
+            <div><h2 class="main-text">Coding Quiz!</h2></div>
             <div><button class="btn" id="start-btn"> Start</button></div>
             <div class="options"> 
                 <button style="display: none" id="option1">option1</button>
@@ -35,7 +40,8 @@
         </div>
     </main>
 
-<script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
 
 </body>
 </html>
