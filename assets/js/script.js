@@ -32,7 +32,7 @@ let question = [{
     option4 : "attribute"
 },
 {
-    text: "Which of the following is a unique selector in CSS?",
+    text: "Which of the selectors is used for unique elements?",
     answer : "id",
     option1 : "class",
     option2 : "semantic",
@@ -62,6 +62,30 @@ let question = [{
     option2 : "instructions",
     option3 : "console.log",
     option4 : "comments"
+},
+{
+    text: "What big O notation is bubble sort (worst-case)?",
+    answer : "O(n^2)",
+    option1 : "O(1)",
+    option2 : "O(n)",
+    option3 : "O(n^2)",
+    option4 : "it's real fast"
+},
+{
+    text: "What is the first program most programmers write?",
+    answer : "HelloWorld",
+    option1 : "HelloWorld",
+    option2 : "DiceRoll",
+    option3 : "BlackJack",
+    option4 : "CodeQuiz"
+},
+{
+    text: "What method generates a random number?",
+    answer : "Math.random()",
+    option1 : "Number.random()",
+    option2 : "Random.number()",
+    option3 : "Math.random()",
+    option4 : "Generator.random()"
 }
 ];
 
